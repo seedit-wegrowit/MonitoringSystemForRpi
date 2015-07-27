@@ -1,5 +1,5 @@
 # MonitoringSystemForRpi
-Environmental monitoring system scalable using Digital and analog sensors - Full distro soon.
+<b>Environmental monitoring system scalable using Digital and analog sensors - Full distro soon.<b>
 
 This project is a enviromental monitoring system using digital and analogs sensors.
 
