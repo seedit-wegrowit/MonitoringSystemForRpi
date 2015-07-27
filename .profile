@@ -46,3 +46,26 @@ else
 fi
 ~/transferK &>/dev/null
 echo "I booted on" ` who -b | cut -d' ' -f13,14` "and logged as-on:"  `who | cut -d' ' -f1,8,16,17,18`  >>  activity.log
+echo "I started autoTakePictures" at `date "+%h%m"` >> activity.log
+#check is autoTakePictures exist or loads it
+SERVICE=Xtightvnc
+if ps ax | grep -v grep | grep $SERVICE > /dev/null
+then
+        echo "$SERVICE service running, everything is fine"
+else
+        echo "$SERVICE is not running, I start it"
+       ~/vncPi
+fi
+
+SERVICE=takePictures.py
+if ps ax | grep -v grep | grep $SERVICE > /dev/null
+then
+        echo "$SERVICE service running, everything is fine"
+else
+        echo "$SERVICE is not running, I start it"
+       #~/python-scripts/autoTakePictures
+#       echo "$SERVICE is not running!" | mail -s "$SERVICE down" root
+fi
+xdg-open http://youtube.com
+
+
