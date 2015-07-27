@@ -1,5 +1,0 @@
-#!/usr/bin/expect -f
-spawn ssh-add /home/pi/.ssh/yourkey
-expect "Enter passphrase for /home/pi/.ssh/yourkey:"
-send "yourpasswordn";
-interact

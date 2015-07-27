@@ -1,3 +1,0 @@
-#!/bin/sh
-#tightvncserver :0 -geometry 800x600 -depth 24 -dpi 96
-tightvncserver :0 -geometry 1280x1024 -depth 8 -dpi 96
