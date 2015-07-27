@@ -55,14 +55,24 @@ This way you can configure other wifi settings an access internet. This is parti
 Credits and references:
 
 http://www.home-automation-community.com/temperature-and-humidity-from-am2302-dht22-sensor-displayed-as-chart/
+
 http://www.instructables.com/id/Raspberry-Pi-Temperature-Humidity-Network-Monitor/
+
 https://github.com/jervine/rpi-temp-humid-monitor
+
 https://plot.ly/raspberry-pi/tmp36-temperature-tutorial/
+
 http://www.instructables.com/id/Soil-Moisture-Sensor-1/?ALLSTEPS
+
 http://www.home-automation-community.com/temperature-and-humidity-from-am2302-dht22-sensor-displayed-as-chart/
+
 http://www.raspberrypi-spy.co.uk/2014/08/enabling-the-spi-interface-on-the-raspberry-pi/
+
 https://github.com/Gadgetoid/py-spidev
+
 http://pi.gadgetoid.com/pinout
+
 https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=110222&p=788582#p788582
+
 
 
