@@ -1,0 +1,21 @@
+#!/bin/bash
+# to copy files to other machines described in the /etc/hosts file.
+sensorValues=/home/pi/projects/humTempScript/sensorValues/
+measurements=/home/pi/projects/humTempScript/Measurements/
+maintenance=/home/pi/projects/maintenanceScripts/
+
+#array containing all the machines hostnames
+declare -a ARRAYhostname=(hostname1 hostname2 hostname3)
+ARRYLength=${#ARRAYhostname[@]}
+
+#go to directory where to copy files
+cd $maintenance
+
+for (( i=0; i<${ARRYLength}; i++ ));
+do
+  echo  ready to coppy to: ${ARRAYhostname[$i]}
+  for f in `ls`; do 
+		scp -i ~/.ssh/yourkey -P 2223 $f pi@${ARRAYhostname[$i]}:/home/pi/projects/maintenanceScripts/
+		echo copied $f to ${ARRAYhostname[$i]}
+	done
+done

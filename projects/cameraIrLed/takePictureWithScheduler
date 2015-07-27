@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+
+import os, sys, logging, time, urllib2, subprocess, StringIO
+from datetime import datetime
+from datetime import datetime, date
+from apscheduler.schedulers.background import BackgroundScheduler
+
+
+# File settings
+
+myhost			= os.uname()[1]
+user			= "yourusers"
+server			= "seedit1"	#in /etc/hosts
+sshKey			= "~/.ssh/yourkey"
+remotePath		= "/yourpath" #path where to copy on the server
+htmlPath		= "/yourhtmlpath" #pulibc path of the server
+camera			= "camera01"
+sec_between_log_entries = 600
+
+# Save a full size image to disk
+def saveImage():
+	global camera
+	time = datetime.now()
+	filename = myhost + "-%02d%02d%04d-%02d%02d%02d.jpg" % (time.day, time.month, time.year, time.hour, time.minute, time.second)
+	# Take a shot
+	subprocess.call("raspistill -w 800 -h 600 -t 1000 -e jpg -q 70 -o %s" % filename, shell=True)
+	
+	# Upload image to server via scp and link via ssh
+	subprocess.call("/usr/bin/scp -i %s %s %s@%s:%s/%s/%s >/dev/null 2>&1" % (sshKey, filename, user, server, remotePath, myhost, camera), shell=True)
+	
+	subprocess.call("/usr/bin/ssh -i %s %s@%s ln -sf %s/%s/%s/%s %s/%s/%s/lastpic.jpg >/dev/null 2>&1"  % (sshKey, user, server, remotePath, myhost, camera, filename, htmlPath, myhost, camera), shell=True)
+
+##################################################
+###### Creating interval timer ###################
+print "Creating interval timer. Wait a bit..."
+scheduler = BackgroundScheduler()
+scheduler.add_job(saveImage, 'interval', seconds=sec_between_log_entries)
+scheduler.start()
+print "Started interval timer which will be called the first time in {0} seconds.".format(sec_between_log_entries);
+
+logging.basicConfig()
+try:
+	while True:
+		#print myhost
+		time.sleep(500)
+except (KeyboardInterrupt, SystemExit):
+	scheduler.shutdown()

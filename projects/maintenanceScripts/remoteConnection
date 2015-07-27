@@ -1,0 +1,15 @@
+#!/bin/bash
+#erase the 1 of each month the hostname-IP log file 
+if [ "`date "+%d%H%M"`" = "011200" ]; then 
+	rm -f ~/`hostname`-IP >/dev/null 2>&1
+fi
+#write external IP date and mac and send the file to the server
+echo From `curl -s http://whatismijnip.nl |cut -d " " -f 5` at `date` >> `hostname`-IP
+scp -i ~/.ssh/yourkey `hostname`-IP youruser@yourserver:/yourpath/`hostname` >/dev/null 2>&1
+#find ssh tunnel and kill it
+kill $(ps aux | grep "ssh -fnN" | grep -v grep | awk '{print $2}')
+sleep 2
+#restart ssh tunnel
+if [ -z "`ps axf | grep localhost:2223 | grep -v grep`" ]; then
+	ssh -fnN -R 2`hostname | cut -c 5,6,7`:localhost:2223 youruser@youruser@yourserver -i ~/.ssh/yourkey >/dev/null 2>&1
+fi
