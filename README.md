@@ -6,12 +6,19 @@ This project is a enviromental monitoring system using digital and analogs senso
 It's composed of:
 
 -Raspberry pi A+ (preferably) or B+ (but the distro has not been tested on B+).
+
 -USB dongle (TP-Link: TL-WN823N)
+
 -Digital Humity and Temperature Sensor - DHT AM3202 
+
 -Analog to Digital Converter - MPC3008
+
 -Resistive soil Sensor
+
 -Analog Temperature sensor LM35
+
 -add up to 5 more analogic sensors onf the MPC3008.
+
 
 This repository will try to guide you throught the full installation of the System, OS settings included.
 A full distro will be availlable soon to (september 2015).
